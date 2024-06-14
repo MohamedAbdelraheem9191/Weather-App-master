@@ -29,143 +29,145 @@ class HomeScreen extends StatelessWidget {
               WeatherCubit.getCubit(context).weatherOFOtherCity;
           return Scaffold(
               body: SafeArea(
-            child: Column(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.all(AppPadding.p40),
-                  child: TextFormField(
-                    cursorColor: ColorManger.blackColor,
-                    onFieldSubmitted: (city) {
-                      cubit.cityName = city;
-                      cubit.getCurrentWeather();
-                      cubit.getWeatherOfOtherCity();
-                    },
-                    style: const TextStyle(
-                        color: ColorManger.whiteColor,
-                        fontSize: FontSizeManger.s18),
-                    decoration: InputDecoration(
-                      labelStyle: Theme.of(context).textTheme.headline2,
-                      label: Text(AppStrings.search),
-                      suffixIcon: const Icon(Icons.search,
-                          color: ColorManger.whiteColor),
+
+              child: Column(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(AppPadding.p40),
+                    child: TextFormField(
+                      cursorColor: ColorManger.blackColor,
+                      onFieldSubmitted: (city) {
+                        cubit.cityName = city;
+                        cubit.getCurrentWeather();
+                        cubit.getWeatherOfOtherCity();
+                      },
+                      style: const TextStyle(
+                          color: ColorManger.whiteColor,
+                          fontSize: FontSizeManger.s18),
+                      decoration: InputDecoration(
+
+                        label: Text(AppStrings.search),
+                        suffixIcon: const Icon(Icons.search,
+                            color: ColorManger.whiteColor),
+                      ),
                     ),
                   ),
-                ),
-                if (weatherModel != null && listWeatherOFOtherCity.isNotEmpty)
-                  Expanded(
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: AppPadding.p15),
-                      child: SingleChildScrollView(
-                        child: Column(
-                          children: [
-                            Text(
-                              (weatherModel.cityName.toString()),
-                              style: Theme.of(context).textTheme.headline5,
-                            ),
-                            const SizedBox(
-                              height: AppSize.s20,
-                            ),
-                            Text(
-                              '${(weatherModel.weatherOfFiveDays[0].temp!).round()}°',
-                              style: Theme.of(context).textTheme.headline6,
-                            ),
-                            const SizedBox(
-                              height: AppSize.s15,
-                            ),
-                            Text(
-                              ('${weatherModel.weatherOfFiveDays[0].weather!.description}'),
-                              style: Theme.of(context).textTheme.headline4,
-                            ),
-                            Container(
-                              width: double.infinity,
-                              padding: const EdgeInsets.symmetric(
-                                  vertical: AppPadding.p10),
-                              margin: const EdgeInsets.symmetric(
-                                  vertical: AppMargin.m15,
-                                  horizontal: AppMargin.m15),
-                              decoration: BoxDecoration(
-                                color: Colors.lightBlueAccent,
-                                borderRadius:
-                                    BorderRadius.circular(AppSize.s30),
+                  if (weatherModel != null && listWeatherOFOtherCity.isNotEmpty)
+                    Expanded(
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: AppPadding.p15),
+                        child: SingleChildScrollView(
+                          child: Column(
+                            children: [
+                              Text(
+                                (weatherModel.cityName.toString()),
+                                style: Theme.of(context).textTheme.headlineSmall,
                               ),
-                              child: Center(
-                                child: Text(
-                                  AppStrings.fiveDayForecast,
-                                  style: Theme.of(context).textTheme.headline3,
-                                ),
+                              const SizedBox(
+                                height: AppSize.s20,
                               ),
-                            ),
-                            ListView.separated(
-                              physics: const NeverScrollableScrollPhysics(),
-                              shrinkWrap: true,
-                              itemBuilder: (context, index) =>
-                                  buildFiveDayForecast(
-                                      weatherModel.weatherOfFiveDays[index],
-                                      context),
-                              separatorBuilder: (context, index) =>
-                                  const SizedBox(
+                              Text(
+                                '${(weatherModel.weatherOfFiveDays[0].temp!).round()}°',
+                                style: Theme.of(context).textTheme.titleLarge,
+                              ),
+                              const SizedBox(
                                 height: AppSize.s15,
                               ),
-                              itemCount: weatherModel.weatherOfFiveDays.length,
-                            ),
-                            Container(
-                              width: double.infinity,
-                              padding: const EdgeInsets.symmetric(
-                                  vertical: AppPadding.p10),
-                              margin: const EdgeInsets.symmetric(
-                                  vertical: AppMargin.m15,
-                                  horizontal: AppMargin.m15),
-                              decoration: BoxDecoration(
-                                color: Colors.lightBlueAccent,
-                                borderRadius:
-                                    BorderRadius.circular(AppSize.s30),
+                              Text(
+                                ('${weatherModel.weatherOfFiveDays[0].weather!.description}'),
+
                               ),
-                              child: Center(
-                                child: Text(
-                                  AppStrings.otherCities,
-                                  style: Theme.of(context).textTheme.headline3,
+                              Container(
+                                width: double.infinity,
+                                padding: const EdgeInsets.symmetric(
+                                    vertical: AppPadding.p10),
+                                margin: const EdgeInsets.symmetric(
+                                    vertical: AppMargin.m15,
+                                    horizontal: AppMargin.m15),
+                                decoration: BoxDecoration(
+                                  color: Colors.lightBlueAccent,
+                                  borderRadius:
+                                      BorderRadius.circular(AppSize.s30),
+                                ),
+                                child: Center(
+                                  child: Text(
+                                    AppStrings.fiveDayForecast,
+                                    style: Theme.of(context).textTheme.displaySmall,
+                                  ),
                                 ),
                               ),
-                            ),
-                            Container(
-                              height: AppSize.s190,
-                              padding: const EdgeInsets.symmetric(
-                                  vertical: AppPadding.p10),
-                              child: ListView.builder(
+                              ListView.separated(
+                                physics: const NeverScrollableScrollPhysics(),
                                 shrinkWrap: true,
-                                physics: const BouncingScrollPhysics(),
-                                scrollDirection: Axis.horizontal,
-                                itemBuilder: (context, index) => buildOtherCity(
-                                    listWeatherOFOtherCity[index], context),
-                                itemCount: listWeatherOFOtherCity.length,
+                                itemBuilder: (context, index) =>
+                                    buildFiveDayForecast(
+                                        weatherModel.weatherOfFiveDays[index],
+                                        context),
+                                separatorBuilder: (context, index) =>
+                                    const SizedBox(
+                                  height: AppSize.s15,
+                                ),
+                                itemCount: weatherModel.weatherOfFiveDays.length,
                               ),
-                            ),
-                          ],
+                              Container(
+                                width: double.infinity,
+                                padding: const EdgeInsets.symmetric(
+                                    vertical: AppPadding.p10),
+                                margin: const EdgeInsets.symmetric(
+                                    vertical: AppMargin.m15,
+                                    horizontal: AppMargin.m15),
+                                decoration: BoxDecoration(
+                                  color: Colors.lightBlueAccent,
+                                  borderRadius:
+                                      BorderRadius.circular(AppSize.s30),
+                                ),
+                                child: Center(
+                                  child: Text(
+                                    AppStrings.otherCities,
+
+                                  ),
+                                ),
+                              ),
+                              Container(
+                                height: AppSize.s190,
+                                padding: const EdgeInsets.symmetric(
+                                    vertical: AppPadding.p10),
+                                child: ListView.builder(
+                                  shrinkWrap: true,
+                                  physics: const BouncingScrollPhysics(),
+                                  scrollDirection: Axis.horizontal,
+                                  itemBuilder: (context, index) => buildOtherCity(
+                                      listWeatherOFOtherCity[index], context),
+                                  itemCount: listWeatherOFOtherCity.length,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    )
+                  else if (state is CurrentWeatherLoadingState ||
+                      state is WeatherOfOtherCityLoadingState)
+                    const Expanded(
+                      child: Center(
+                          child: CircularProgressIndicator(
+                        color: ColorManger.whiteColor,
+                      )),
+                    )
+                  else if (state is CurrentWeatherErrorState ||
+                      state is WeatherOfOtherCityErrorState)
+                    Expanded(
+                      child: Center(
+                        child: Text(
+                          cubit.errorMsg.toString(),
+
                         ),
                       ),
                     ),
-                  )
-                else if (state is CurrentWeatherLoadingState ||
-                    state is WeatherOfOtherCityLoadingState)
-                  const Expanded(
-                    child: Center(
-                        child: CircularProgressIndicator(
-                      color: ColorManger.whiteColor,
-                    )),
-                  )
-                else if (state is CurrentWeatherErrorState ||
-                    state is WeatherOfOtherCityErrorState)
-                  Expanded(
-                    child: Center(
-                      child: Text(
-                        cubit.errorMsg.toString(),
-                        style: Theme.of(context).textTheme.headline3,
-                      ),
-                    ),
-                  ),
-              ],
-            ),
+                ],
+              ),
+
           ));
         },
       ),
@@ -214,7 +216,7 @@ class HomeScreen extends StatelessWidget {
               Flexible(
                 child: Text(
                   ('${getDayOfForecast(weatherModel)} - ${weatherModel.weather!.description}'),
-                  style: Theme.of(context).textTheme.headline2,
+
                 ),
               ),
             ],
@@ -222,7 +224,7 @@ class HomeScreen extends StatelessWidget {
         ),
         Text(
           '${(weatherModel.maxTemp)!.round()}° / ${(weatherModel.minTemp)!.round()}°',
-          style: Theme.of(context).textTheme.headline2,
+
         )
       ],
     );
@@ -246,14 +248,14 @@ Widget buildOtherCity(WeatherDataModel weatherModel, BuildContext context) {
           ),
           Text(
             ('${(weatherModel.weatherOfFiveDays[0].temp)!.round()}°'),
-            style: Theme.of(context).textTheme.bodyText1,
+            style: Theme.of(context).textTheme.bodyLarge,
           ),
           const SizedBox(
             height: 10,
           ),
           Text(
             (weatherModel.cityName.toString()),
-            style: Theme.of(context).textTheme.bodyText2,
+
           ),
         ],
       ),
