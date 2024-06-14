@@ -17,20 +17,20 @@ ThemeData getAppTheme() {
         ),
       ),
       textTheme: TextTheme(
-        headline1: getMediumStyle(color: ColorManger.whiteColor),
-        headline2: getMediumStyle(
+        displayLarge: getMediumStyle(color: ColorManger.whiteColor),
+        displayMedium: getMediumStyle(
             color: ColorManger.whiteColor, fontSize: FontSizeManger.s18),
-        headline3: getMediumStyle(
+        displaySmall: getMediumStyle(
             color: ColorManger.whiteColor, fontSize: FontSizeManger.s22),
-        headline4: getMediumStyle(
+        headlineMedium: getMediumStyle(
             color: ColorManger.whiteColor, fontSize: FontSizeManger.s24),
-        headline5: getBoldStyle(
+        headlineSmall: getBoldStyle(
             color: ColorManger.whiteColor, fontSize: FontSizeManger.s30),
-        headline6: getBoldStyle(
+        titleLarge: getBoldStyle(
             color: ColorManger.whiteColor, fontSize: FontSizeManger.s80),
-        bodyText1: getMediumStyle(
+        bodyLarge: getMediumStyle(
             color: ColorManger.blackColor, fontSize: FontSizeManger.s30),
-        bodyText2: getMediumStyle(
+        bodyMedium: getMediumStyle(
             color: ColorManger.blackColor, fontSize: FontSizeManger.s24),
       ),
       cardTheme: CardTheme(
